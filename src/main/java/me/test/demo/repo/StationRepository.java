@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 
 import me.test.demo.model.Station;
 
@@ -18,7 +19,7 @@ public interface StationRepository {
 
 	@Insert("insert into station(stationid, name, hdenabled,callsign) "
 			+ " values (#{stationId}, #{name}, #{hdEnabled}, #{callSign})")
-	public int insert(Station station);
+	public int insert(Station station) throws JdbcSQLIntegrityConstraintViolationException;
 
 	@Update("update station set name=#{name}, "
 			+ " hdenabled=#{hdEnabled}, callsign=#{callSign} where stationid=#{stationId}")
